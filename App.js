@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
 
-export default function App() {
+const fetchFont = () => (
+  Font.loadAsync({
+    'lato': require('./assets/fonts/Lato-Regular.ttf'),
+    'lato-light': require('./assets/fonts/Lato-Light.ttf'),
+    'lato-bold': require('./assets/fonts/Lato-Bold.ttf')
+  })
+)
+
+const App = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if(!fontLoaded){
+    return (
+      <AppLoading startAsync={fetchFont} onFinish={() => setFontLoaded(true)}/>
+    )
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Meal App</Text>
     </View>
   );
 }
@@ -17,3 +35,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;

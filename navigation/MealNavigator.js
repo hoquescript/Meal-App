@@ -8,7 +8,7 @@ import CategoriesMealScreen from '../screens/CategoriesMealScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 // import FavouriteScreen from '../screens/FavouriteScreen';
 // import FilterScreen from '../screens/FilterScreen';
-// import MealDetailsScreen from '../screens/MealDetailsScreen';
+import MealDetailsScreen from '../screens/MealDetailsScreen';
 
 const navigator = createStackNavigator({
     Categories: {
@@ -18,6 +18,7 @@ const navigator = createStackNavigator({
         }
     },
     CategoriesMeal: CategoriesMealScreen,
+    MealDetails: MealDetailsScreen
 },
 {
     // initialRouteName: 'Categories',

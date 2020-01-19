@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10,
         backgroundColor: '#333',
-        borderRadius: 10
+        borderRadius: 10,
+        elevation: 5
     },
     touchBtn: {
         height: 150,

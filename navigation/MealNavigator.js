@@ -1,21 +1,20 @@
 import React from "react";
+import { Platform } from "react-native";
 
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
-import { Platform } from "react-native";
-
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constant/Colors";
 
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoriesMealScreen from "../screens/CategoriesMealScreen";
 import MealDetailsScreen from "../screens/MealDetailsScreen";
-
 import FavouriteScreen from "../screens/FavouriteScreen";
-import { Ionicons } from "@expo/vector-icons";
-// import FilterScreen from '../screens/FilterScreen';
+import FilterScreen from '../screens/FilterScreen';
 
 const defaultNavigationOption = {
     headerStyle: {
@@ -37,7 +36,6 @@ const MealStackNavigator = createStackNavigator(
         MealDetails: MealDetailsScreen
     },
     {
-        // initialRouteName: 'Categories',
         defaultNavigationOptions: defaultNavigationOption
     }
 );
@@ -51,6 +49,12 @@ const FavouriteStackNavigator =  createStackNavigator(
         defaultNavigationOptions: defaultNavigationOption
     }
 )
+const FilterStackNavigator = createStackNavigator({
+    Filter: FilterScreen
+},
+{
+    defaultNavigationOptions: defaultNavigationOption
+})
 
 const routeConfig = {
     Meal: {
@@ -92,4 +96,9 @@ const mealTabNavigator =
             }
         });
 
-export default createAppContainer(mealTabNavigator);
+
+const MainNavigator = createDrawerNavigator({
+    Meal: mealTabNavigator,
+    Filters: FilterStackNavigator
+})
+export default createAppContainer(MainNavigator);

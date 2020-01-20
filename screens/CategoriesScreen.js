@@ -1,14 +1,10 @@
 import React from "react";
-import {
-    Text,
-    StyleSheet,
-    FlatList,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { FlatList } from "react-native";
 
 import { CATEGORIES } from "../data/dummy-data";
 import MealType from "../components/MealType";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import headerButton from "../components/HeaderButton";
 
 const CategoriesScreen = props => {
     const dataRender = itemData => (
@@ -35,15 +31,16 @@ const CategoriesScreen = props => {
     );
 };
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         height: 150,
-//         margin: 10,
-//         justifyContent: "center",
-//         alignItems: "center",
-//         backgroundColor: "#333"
-//     }
-// });
+CategoriesScreen.navigationOptions = navData => {
+    return {
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={headerButton}>
+                <Item title="Menu" iconName="ios-menu" onPress ={ () => {
+                    navData.navigation.toggleDrawer();
+                }}/>
+            </HeaderButtons>
+        )
+    };
+};
 
 export default CategoriesScreen;

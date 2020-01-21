@@ -67,7 +67,7 @@ const routeConfig = {
                     color={tabInfo.tintColor}
                 />
             ),
-            tabBarColor: '#2c3e50' //Works with shifting only
+            tabBarColor: Colors.primary //Works with shifting only
         }
     },
     Favourites: {
@@ -76,7 +76,7 @@ const routeConfig = {
             tabBarIcon: tabInfo => (
                 <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />
             ),
-            tabBarColor: '#34495e' //Works with shifting only
+            tabBarColor: Colors.secondary //Works with shifting only
         }
     }
 };

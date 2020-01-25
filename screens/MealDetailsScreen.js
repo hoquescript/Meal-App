@@ -1,14 +1,15 @@
 import React from "react";
-import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
-import { MEALS } from "../data/dummy-data";
+import { useSelector } from 'react-redux'
+import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 
 const MealDetailsScreen = props => {
     const mealId = props.navigation.getParam("mealId");
-    const mealDetails = MEALS.find(meal => meal.id === mealId);
+    const mealData = useSelector(state => state.meals.meals)
+    const mealDetails = mealData.find(meal => meal.id === mealId);
     return (
-        // <ScrollView>
+        <ScrollView>
             <View>
                 <Image source={{uri: mealDetails.imageUrl}} style={styles.image}/>
                 <View style={styles.body}>
@@ -23,7 +24,7 @@ const MealDetailsScreen = props => {
                     </Text>
                 </View>
                 <Text style={styles.title}>List Of Ingredients</Text>
-                <View>
+                <View style={styles.content}>
                 {
                     mealDetails.ingredients.map((ing,index) => (
                         <Text key={index}>{ing}</Text>
@@ -31,7 +32,7 @@ const MealDetailsScreen = props => {
                 }
                 </View>
                 <Text style={styles.title}>List Of Steps</Text>
-                <View>
+                <View style={styles.content}>
                 {
                     mealDetails.steps.map((step,index) => (
                     <Text key={index}>
@@ -43,15 +44,14 @@ const MealDetailsScreen = props => {
                 </View>
                 <Text>{mealDetails.title}</Text>
             </View>
-        // </ScrollView>
+        </ScrollView>
     );
 };
 
 MealDetailsScreen.navigationOptions = navigationData => {
-    const mealId = navigationData.navigation.getParam("mealId");
-    const mealDetails = MEALS.find(meal => meal.id !== mealId);
+    const mealTitle = navigationData.navigation.getParam("mealTitle");
     return {
-        headerTitle: mealDetails.title,
+        headerTitle: mealTitle,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
@@ -72,14 +72,18 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     body:{
-        height:'10%',
-        paddingVertical: 10,
+        height:'7%',
+        // paddingVertical: 10,
         paddingHorizontal: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#eee',
-        margin: 10
+        marginBottom: 10
+    },
+    content: {
+        marginHorizontal: 10,
+        marginVertical: 20
     },
     title: {
         fontSize: 20,

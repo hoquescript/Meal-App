@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
 import Meal from '../components/Meal'
 
 const MealList = ({ mealData, navigation}) => {
@@ -14,7 +14,8 @@ const MealList = ({ mealData, navigation}) => {
                 onClick = {() => navigation.navigate({
                     routeName : 'MealDetails',
                     params : {
-                        mealId: item.id
+                        mealId: item.id,
+                        mealTitle: item.title
                     }
                 })}
             />
